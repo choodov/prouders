@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : error
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+        <div ID="cmain">
+        <h3><fmt:message key="TEXT_ERROR"/>:</h3>
+            <hr/>
+            <c:choose>
+                <c:when test="${not empty error}">
+                    <c:choose>
+                        <c:when test="${error eq 'REGISTRATION_ERROR'}">
+                            <fmt:message key="REGISTRATION_ERROR"/>
+                        </c:when>                        
+                        <c:when test="${error eq 'ADD_COMM_TO_PROUDER_ERROR'}">
+                            <fmt:message key="ADD_COMM_TO_PROUDER_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'TEXT_PROUDER_CHANG_ERROR'}">
+                            <fmt:message key="TEXT_PROUDER_CHANG_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'TEXT_STORY_CHANG_ERROR'}">
+                            <fmt:message key="TEXT_STORY_CHANG_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'COMMUNITIES_ERROR'}">
+                            <fmt:message key="COMMUNITIES_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'COUNTRIES_ERROR'}">
+                            <fmt:message key="COUNTRIES_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'COUNTRY_ERROR'}">
+                            <fmt:message key="COUNTRY_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'CREATE_NEW_COMM_ERROR'}">
+                            <fmt:message key="CREATE_NEW_COMM_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'CREATE_NEW_STORY_ERROR'}">
+                            <fmt:message key="CREATE_NEW_STORY_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'FORGOTPWD_ERROR'}">
+                            <fmt:message key="FORGOTPWD_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'LOGIN_DELETED_ERROR'}">
+                            <fmt:message key="LOGIN_DELETED_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'LOGIN_ERROR'}">
+                            <fmt:message key="LOGIN_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'CHANGE_PROFILE_ERROR'}">
+                            <fmt:message key="CHANGE_PROFILE_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'STORY_ERROR'}">
+                            <fmt:message key="STORY_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'PROUDERS_ERROR'}">
+                            <fmt:message key="PROUDERS_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'STORIES_ERROR'}">
+                            <fmt:message key="STORIES_ERROR"/>
+                        </c:when>
+                        <c:when test="${error eq 'STORY_ERROR'}">
+                            <fmt:message key="STORY_ERROR"/>
+                        </c:when>                        
+                    </c:choose>                    
+                </c:when>
+                <c:otherwise>
+                   <fmt:message key="UNKNOWN_ERROR"/> 
+                </c:otherwise>
+            </c:choose>
+         </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>

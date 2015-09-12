@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : main
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+        <div ID="cmain">
+
+                <c:if test="${not empty about}">
+                    <h3><fmt:message key="TEXT_ABOUT"/></h3>
+                    <fmt:message key="TEXT_ABOUT_BODY"/>
+                </c:if>
+                    
+                <c:if test="${not empty rules}">
+                <h3><fmt:message key="TEXT_RULES"/></h3>
+                <UL><LI><fmt:message key="TEXT_RULES_1"/></LI>
+                    <LI><fmt:message key="TEXT_RULES_2"/></LI>
+                    <LI><fmt:message key="TEXT_RULES_3"/></LI>
+                    <LI><fmt:message key="TEXT_RULES_4"/></LI>
+                </UL>    
+                </c:if>
+                <c:if test="${not empty registrationMessage}">
+                    <fmt:message key="SUCCESS_REG"/>
+                </c:if>
+        </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/>  
+</jsp:root>

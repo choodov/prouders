@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : story
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+    <div ID="cmain">
+        <h3><fmt:message key="TEXT_STORY"/>:</h3>
+        <c:if test="${(prouder.type.userType eq 'admin') 
+                      or (prouder.type.userType eq 'admin patriot')}">
+            <form name="changeStoryForm" method="post" action="FrontController">
+            <input type="hidden" name="command" value ="adminchangestory"/>
+            <input type="hidden" name="storyID" value ="${story.ID}" />
+                <tr><td><fmt:message key="TEXT_FLAG"/>:</td>
+                <td>
+                <SELECT NAME="storyFlag">
+                <c:forEach var="item" items="${storyFalgList}" >
+                    <c:choose>
+                        <c:when test="${item.storyFlag eq story.flag.storyFlag}">
+                            <OPTION SELECTED="">
+                                ${item.storyFlag}
+                            </OPTION>
+                        </c:when>
+                        <c:otherwise>
+                            <OPTION >
+                               ${item.storyFlag}
+                            </OPTION>
+                        </c:otherwise>    
+                    </c:choose>
+                </c:forEach>
+                </SELECT></td></tr>
+                <tr><td><fmt:message key="TEXT_STATUS"/>:</td>
+                    <td>
+                        <SELECT NAME="storyStatus">
+                        <c:forEach var="item" items="${statusList}" >
+                            <c:choose>
+                                <c:when test="${item eq story.status}">
+                                    <OPTION SELECTED="">
+                                        ${item}
+                                    </OPTION>
+                                </c:when>
+                                <c:otherwise>
+                                    <OPTION >
+                                       ${item}
+                                    </OPTION>
+                                </c:otherwise>    
+                            </c:choose>
+                        </c:forEach>
+                        </SELECT>
+
+                    </td></tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">
+                            <fmt:message key="BUTTON_CHANGE"/>
+                        </button>
+                    </td>
+                </tr>
+                </form>
+         </c:if>
+        <p><form name="storyForm" method="post" action="FrontController">
+            <input type="hidden" name="command" value ="proudstory" />
+            <input type="hidden" name="storyID" value ="${story.ID}" />
+            <table cellspacing="5" cellpadding="0">
+                <tr>
+                <td><fmt:message key="TEXT_STORY_SMALL"/>: ${story.header}</td>
+                <td><fmt:message key="TEXT_DATE"/>:${story.time}</td>
+                </tr>
+                <tr>
+                    <td>
+                        <TEXTAREA ROWS="10" COLS="50" readonly="">${story.body}
+                        </TEXTAREA>
+                    </td>
+                </tr>
+                <tr><td><fmt:message key="TEXT_TOTAL_PROUDS"/>:</td>
+                    <td>${story.totalAmount}</td></tr>
+                <tr><td><fmt:message key="TEXT_PROUDER"/>:</td>
+                    <td>${story.prouder.name}</td></tr>
+                <tr><td><fmt:message key="TEXT_COMMUNITY"/>:</td>
+                    <td>${story.community.name}</td></tr>
+                <tr><td><fmt:message key="TEXT_FLAG"/>:</td>
+                        <td>${story.flag.storyFlag}</td></tr>
+                    <tr><td><fmt:message key="TEXT_STATUS"/>:</td>
+                        <td>${story.status}</td></tr>
+                
+            </table>
+            <c:choose>
+                <c:when test="${not empty user}">
+                    <c:choose>
+                        <c:when test="${story.status eq 'BLOCKED'}">
+                            <fmt:message key="TEXT_STORY_BLOCKED"/>
+                        </c:when>
+                        <c:when test="${prouder.status eq 'BLOCKED'}">
+                            <fmt:message key="TEXT_STORY_PROUDER_BLOCKED"/>
+                        </c:when>
+                        <c:when test="${not empty proudercounter}">
+                            <fmt:message key="TEXT_ALREADY_PROUD"/>
+                        </c:when>
+                        <c:otherwise>
+                            <button type="submit">
+                                <fmt:message key="BUTTON_PROUD"/>
+                            </button>
+                        </c:otherwise>
+                    </c:choose>
+                </c:when>
+                <c:otherwise>
+                    <fmt:message key="TEXT_PLEASE_LOGIN"/>
+                </c:otherwise>
+            </c:choose>
+        </form>
+        </p>
+    </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/> 
+</jsp:root>

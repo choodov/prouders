@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : countries
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+    <div ID="cmain">
+        <c:choose>
+            <c:when test="${countryID > 0}">
+                <h3>Country: ${country}</h3>
+                <jsp:directive.include file="/jspf/stories.jspf"/>
+            </c:when>
+            <c:otherwise>
+                <h3><fmt:message key="TEXT_COUNTRIES"/>:</h3>
+                <table cellspacing="5" cellpadding="0">
+                    <tr>
+                        <td><h4><fmt:message key="TEXT_COUNTRY"/>:</h4></td>
+                        <td><h4><fmt:message key="TEXT_TOTAL_PROUDS"/>:</h4></td>
+                    </tr>            
+                    <c:forEach var="item" items="${countryList}" >
+                        <tr>
+                            <td>
+                            <form name="CountryForm" method="POST" action="FrontController">
+                                <input type="hidden" name="command" value ="country"/>
+                                <input type="hidden" name="country" 
+                                       value ="${item.countryName}"/>
+                                <input type="hidden" name="countryID" 
+                                       value ="${item.countryID}"/>
+                                <button type="submit">${item.countryName}</button>
+                            </form>                        
+                            </td>
+                            <td>${item.totalAmount}</td>
+                        </tr>                
+                    </c:forEach>
+                </table>
+            </c:otherwise>
+        </c:choose>
+    </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>

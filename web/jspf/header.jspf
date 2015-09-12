@@ -1,0 +1,176 @@
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>PROUDERS.com</title>
+        <link REL="stylesheet" HREF="CSS/prouders.css" TYPE="text/css">
+    </head>
+    <body>        
+        <div ID="cheader">
+        <table cellspacing="0" cellpadding="0">
+        <tr>
+         <td>
+            <a href="http://localhost:8080/prouders/">
+                <img src="/prouders/images/logo_30x200.gif" 
+                width="200" height="30"></a>
+<!--             <form>
+                 <select id="language" name="language" onchange="submit()">
+                     <option value="en" ${language == 'en' ? 'selected' : ''}>engl</option>
+                     <option value="ru" ${language == 'ru' ? 'selected' : ''}>russ</option>
+                 </select>
+             </form>-->
+<!--            <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <form name="enForm" method="POST" action="FrontController">
+                        <input type="hidden" name="command" value ="locale" />
+                        <input type="hidden" name="language" value ="en_GB" />
+                        <button  type="submit">
+                        <img src="/prouders/images/en.png" 
+                             width="10" height="10">
+                        <fmt:message key="BUTTON_ENG"/>
+                        </button>
+                    </form>
+                    </td>
+                    <td>
+                        <form name="ruForm" method="POST" action="FrontController">
+                        <input type="hidden" name="command" value ="locale" />
+                        <input type="hidden" name="language" value ="ru_RU" />
+                        <button type="submit">
+                        <img src="/prouders/images/ru.png" 
+                             width="10" height="10">
+                        <fmt:message key="BUTTON_RUS"/>
+                        </button>
+                    </form>
+                    </td>
+                </tr>
+             </table>-->
+            <!--</div>-->
+            <!--<div ID="cmenu">-->
+        </td>
+        <td>
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="countries" />
+                <button type="submit">
+                <img src="/prouders/images/country_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_COUNTRIES"/>
+                </button>
+            </form>
+        </td>
+        <td>
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="communities" />
+                <button type="submit">
+                <img src="/prouders/images/community_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_COMMUNITIES"/>
+                </button>
+            </form>
+        </td>
+        <td>    
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="stories" />
+                <button type="submit">
+                <img src="/prouders/images/story_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_STORIES"/>
+                </button>
+            </form>
+         </td>
+        <td>   
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="prouders" />
+                <button type="submit">
+                <img src="/prouders/images/prouder_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_PROUDERS"/>
+                </button>
+            </form>
+         </td>
+        <td>   
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="rules" />
+                <button type="submit">
+                    <img src="/prouders/images/rules_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_RULES"/>
+                </button>        
+            </form>
+        </td>
+        <td>   
+            <form name="proudersForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="about" />
+                <button type="submit">
+                    <img src="/prouders/images/about_30x30.gif" 
+                     width="20" height="20">
+                <fmt:message key="BUTTON_ABOUT"/>
+                </button>        
+            </form>
+        </td>
+        <td>
+        <c:choose>
+            <c:when test="${not empty user}">
+                <table cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>
+                        <form name="profileForm" method="POST" action="FrontController">
+                        <input type="hidden" name="command" value ="userprofile" />
+                        <button type="submit">${user}</button> 
+                    </form>
+                    </td>
+                    <td>
+                      
+                    <form name="logoffForm" method="POST" action="FrontController">
+                        <input type="hidden" name="command" value ="login" />
+                        <input type="hidden" name="logoff" value ="true" />
+                        <button type="submit">
+                            <fmt:message key="BUTTON_LOGOFF"/>
+                        </button> 
+                    </form>
+                    </td>
+                </tr>
+                </table>
+            </c:when>
+            <c:otherwise>
+            <table cellspacing="0" cellpadding="0">
+                <tr>
+                <form name="loginForm" method="POST" action="FrontController">
+                    <input type="hidden" name="command" value ="login" />
+                    <fmt:message key="TEXT_EMAIL"/> : 
+                    <input type="text" name="email" value ="" size="7"><br>
+                    <fmt:message key="TEXT_PASSWORD"/>: 
+                    <input type="password" name ="password" value="" size="7">
+                    <button type="submit">
+                            <fmt:message key="BUTTON_LOGIN"/>
+                    </button>
+                </form>
+                </tr>
+                <tr>
+                <td>
+                <form name="registraionForm" method="POST" action="FrontController">
+                    <input type="hidden" name="command" value ="registration" />
+                    <button type="submit">
+                            <fmt:message key="BUTTON_REGISTER"/>
+                    </button>
+                </form>
+                </td>
+                <td>
+                <form name="forgotPasswordForm" method="POST" action="FrontController">
+                    <input type="hidden" name="command" value ="forgotpassword" />
+                    <button type="submit">
+                            <fmt:message key="BUTTON_RECOWER_PWD"/>
+                    </button>
+                </form>
+                </td>
+                </tr>
+            </table>
+            </c:otherwise>
+        </c:choose>    
+        </td>
+        </tr>
+        </table>
+        </div>
+

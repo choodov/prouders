@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : prouder
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+    <div ID="cmain">
+        <h3><fmt:message key="TEXT_PROUDER"/>: ${prouder.name}</h3>
+        
+        <c:if test="${sessionProuder.type.userType eq 'admin'}">
+            <form name="changeProuderForm" method="post" action="FrontController">
+            <input type="hidden" name="command" value ="adminchangeprouder"/>
+            <input type="hidden" name="prouderID" value ="${prouder.ID}"/>
+                <tr><td><fmt:message key="TEXT_FLAG"/>:</td>
+                <td>
+                <SELECT NAME="prouderType">
+                <c:forEach var="item" items="${userTypeList}" >
+                    <c:choose>
+                        <c:when test="${item.userType eq prouder.type.userType}">
+                            <OPTION SELECTED="">
+                                ${item.userType}
+                            </OPTION>
+                        </c:when>
+                        <c:otherwise>
+                            <OPTION >
+                               ${item.userType}
+                            </OPTION>
+                        </c:otherwise>    
+                    </c:choose>
+                </c:forEach>
+                </SELECT></td></tr>
+                <tr><td><fmt:message key="TEXT_STATUS"/>:</td>
+                    <td>
+                        <SELECT NAME="prouderStatus">
+                        <c:forEach var="item" items="${statusList}" >
+                            <c:choose>
+                                <c:when test="${item eq prouder.status}">
+                                    <OPTION SELECTED="">
+                                        ${item}
+                                    </OPTION>
+                                </c:when>
+                                <c:otherwise>
+                                    <OPTION >
+                                       ${item}
+                                    </OPTION>
+                                </c:otherwise>    
+                            </c:choose>
+                        </c:forEach>
+                        </SELECT>
+                    </td></tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button type="submit">
+                            <fmt:message key="BUTTON_CHANGE"/>
+                        </button>
+                    </td>
+                </tr>
+                </form>
+         </c:if>
+        <jsp:directive.include file="/jspf/stories.jspf"/>
+    </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>

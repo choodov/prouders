@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : index
+    Created on : 31.05.2015, 10:57:30
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<c:set var="language" value="${not empty param.language ? 
+      param.language : not empty language ? 
+      language : pageContext.request.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+<div ID="cmain">
+    <table cellspacing="20" cellpadding="0">
+        <c:set var="amount" value="10"/>
+        <tr>
+            <td>
+                <table cellspacing="20" cellpadding="0">
+                    <tr>
+                        <td><h3><fmt:message key="TEXT_TOP"/> ${amount} <fmt:message key="TEXT_COUNTRIES_SMALL"/></h3></td>
+                        <td><h3><fmt:message key="TEXT_TOTAL_PROUDS"/></h3></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table cellspacing="20" cellpadding="0">
+                    <tr>
+                        <td><h3><fmt:message key="TEXT_TOP"/> ${amount} <fmt:message key="TEXT_COMMUNITIES_SMALL"/></h3></td>
+                        <td><h3><fmt:message key="TEXT_TOTAL_PROUDS"/></h3></td>
+                    </tr>
+                </table>
+            </td>
+            <td>
+                <table cellspacing="20" cellpadding="0">
+                    <tr>
+                        <td><h3><fmt:message key="TEXT_TOP"/> ${amount} <fmt:message key="TEXT_STORIES_SMAL"/></h3></td>
+                        <td><h3><fmt:message key="TEXT_TOTAL_PROUDS"/></h3></td>
+                    </tr>
+                </table>
+            </td>
+            
+        </tr>
+        <tr>
+            <td valign="top">
+                <pt:TopTag content="countries" amount="${amount}"/>
+            </td>
+            <td valign="top">
+                <pt:TopTag content="communities" amount="${amount}"/>
+            </td>
+            <td valign="top">
+               <pt:TopTag content="stories" amount="${amount}"/>
+            </td>
+        </tr>
+    </table>
+</div>
+<jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>

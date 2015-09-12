@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : admin
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+    
+    <h4><fmt:message key="TEXT_ADMIN_PAGE"/></h4>
+    <table cellspacing="20" cellpadding="0">
+        <tr>
+            <td valign="top">
+    
+    <h4><fmt:message key="TEXT_NEW_PREPARED_STORIES"/>:</h4>
+    <table cellspacing="20" cellpadding="0">
+        <tr>
+            <td><h4><fmt:message key="TEXT_STORY_SMALL"/>:</h4></td>
+            <td><h4><fmt:message key="TEXT_TOTAL_PROUDS"/>:</h4></td>
+            <td><h4><fmt:message key="TEXT_FLAG"/>:</h4></td>
+            <td><h4><fmt:message key="TEXT_STATUS"/>:</h4></td>
+        </tr>            
+        <c:forEach var="item" items="${storyList}" >
+            <tr>
+                <td>
+                <form name="StoriesForm" method="POST" action="FrontController">
+                    <input type="hidden" name="command" value ="story"/>
+                    <input type="hidden" name="storyID" 
+                           value ="${item.ID}"/>
+                    <button type="submit">${item.header}</button>
+                </form>                        
+                </td>
+                <td>${item.totalAmount}</td>
+                <td>${item.flag.storyFlag}</td>
+                <td>${item.status}</td>
+            </tr> 
+        </c:forEach>
+        </table>
+          
+            </td>
+            <td valign="top">
+        
+        <h4><fmt:message key="TEXT_PROUDERS"/>:</h4>
+            <table cellspacing="20" cellpadding="0">
+                <tr>
+                    <td><h4><fmt:message key="TEXT_PROUDER"/></h4></td>
+                    <td><h4><fmt:message key="TEXT_STATUS"/></h4></td>
+                    <td><h4><fmt:message key="TEXT_TYPE"/></h4></td>
+                </tr>            
+                <c:forEach var="item" items="${prouderList}" >
+                    <tr>
+                        <td>
+                        <form name="ProudersForm" method="POST" action="FrontController">
+                            <input type="hidden" name="command" value ="prouder"/>
+                            <input type="hidden" name="prouder" 
+                                   value ="${item.name}"/>
+                            <input type="hidden" name="prouderID" 
+                                   value ="${item.ID}"/>                            
+                            <button type="submit">${item.name}</button>
+                        </form>                        
+                        </td>
+                        <td>${item.status}</td>
+                        <td>${item.type.userType}</td>
+                    </tr>                
+                </c:forEach>
+            </table>
+            </td></tr>
+    </table>
+    <jsp:directive.include file="/jspf/ender.jspf"/>                
+</jsp:root>

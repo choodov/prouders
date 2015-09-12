@@ -1,0 +1,48 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:directive.page pageEncoding="UTF-8"/>
+<h4><fmt:message key="TEXT_STORIES_SMAL"/>:</h4>
+<c:choose>
+    <c:when test="${not empty user}">
+        <form name="newStoryForm" method="POST" action="FrontController">
+            <input type="hidden" name="command" value ="newstory" />
+            <button type="submit">
+            <fmt:message key="BUTTON_NEW_STORY"/>
+            </button>
+        </form>
+    </c:when>
+    <c:otherwise>
+        <fmt:message key="TEXT_LOGIN_TO_NEW_STORY"/>
+    </c:otherwise>
+</c:choose>
+<table cellspacing="20" cellpadding="0">
+<tr>
+    <td><h4><fmt:message key="TEXT_STORY_SMALL"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_DATE"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_TOTAL_PROUDS"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_PROUDER"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_COMMUNITY"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_FLAG"/>:</h4></td>
+    <td><h4><fmt:message key="TEXT_STATUS"/>:</h4></td>
+</tr>            
+<c:forEach var="item" items="${storyList}" >
+    <tr>
+        <td>
+        <form name="StoriesForm" method="POST" action="FrontController">
+            <input type="hidden" name="command" value ="story"/>
+            <input type="hidden" name="storyID" 
+                   value ="${item.ID}"/>
+            <button type="submit">${item.header}</button>
+        </form>                        
+        </td>
+        <td>${item.time}</td>
+        <td>${item.totalAmount}</td>
+        <td>${item.prouder.name}</td>
+        <td>${item.community.name}</td>
+        <td>${item.flag.storyFlag}</td>
+        <td>${item.status}</td>
+    </tr> 
+</c:forEach>
+</table>
+<c:if test="${not empty amptyStoryList}">
+    <fmt:message key="STORIES_ERROR"/>
+</c:if>

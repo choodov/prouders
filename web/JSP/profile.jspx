@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : profile
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+<h3><fmt:message key="TEXT_USER_PROFILE"/>: ${prouder.name}</h3>
+    <c:choose>
+        <c:when test="${checkFlag eq 'true'}">
+            <h4 style="color:red"><fmt:message key="TEXT_ERROR"/><br/>
+            <c:if test="${checkEmailError eq 'true'}">
+                <fmt:message key="WRONG_EMAIL_ERROR"/><br/>
+            </c:if>
+            <c:if test="${checkPasswordsError eq 'true'}">
+                <fmt:message key="WRONG_PASSWORD_ERROR"/><br/>
+            </c:if></h4>
+        </c:when>
+    </c:choose>
+    <c:if test="${profilechangeMessage eq 'true'}">
+        <fmt:message key="TEXT_SUCCESS_PROFILE_CHANGE"/>
+    </c:if>
+<form name="ProudersForm" method="POST" action="FrontController">
+            <input type="hidden" name="command" value ="profilechange"/>
+            <input type="hidden" name="prouder" 
+                   value ="${item.name}"/>
+            <input type="hidden" name="prouderID" 
+                   value ="${item.ID}"/> 
+    <table cellspacing="0" cellpadding="0">
+        <tr>
+            <td><fmt:message key="TEXT_EMAIL"/>:</td>
+            <td><input type="text" name="email" value="${prouder.email}"/></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="TEXT_PASSWORD"/>:</td>
+            <td><input type="password" name="password" value=""/></td>
+        </tr> 
+        <tr>
+            <td><fmt:message key="TEXT_CONF_PWD"/>:</td>
+            <td><input type="password" name="confpassword" value=""/></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="TEXT_COUNTRY"/></td>
+            <td>${prouder.country.countryName}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="TEXT_STATUS"/></td>
+            <td>${prouder.status}</td>
+        </tr>
+        <tr>
+            <td><fmt:message key="TEXT_TYPE"/></td>
+            <td>${prouder.type.userType}</td>
+        </tr>
+        <tr>
+            <td><button type="submit">
+                    <fmt:message key="BUTTON_CHANGE_USER_DATA"/>
+                </button></td>
+            <td></td>
+        </tr> 
+    </table>
+ </form> 
+                
+<h3><fmt:message key="TEXT_MY_COMMYNITIES"/>:</h3>
+<table cellspacing="20" cellpadding="0">
+    <tr>
+        <td><h4><fmt:message key="TEXT_COMMUNITY"/></h4></td>
+        <td><h4><fmt:message key="TEXT_DESCRIPT"/></h4></td>
+        <td><h4><fmt:message key="TEXT_COUNTRY"/></h4></td>
+        <td><h4><fmt:message key="TEXT_TOTAL_PROUDS"/>:</h4></td>
+        <td><h4><fmt:message key="TEXT_STATUS"/></h4></td>
+        <td><h4><fmt:message key="TEXT_TYPE"/></h4></td>
+    </tr>            
+    <c:forEach var="item" items="${communityList}" >
+        <tr>
+            <td>
+            <form name="CommunityForm" method="POST" action="FrontController">
+                <input type="hidden" name="command" value ="community"/>
+                <input type="hidden" name="community" 
+                       value ="${item.name}"/>
+                 <button type="submit">${item.name}</button>
+            </form>                        
+            </td>
+            <td>${item.description}</td>
+            <td>${item.country.countryName}</td>
+            <td>${item.totalAmount}</td>
+            <td>${item.status}</td>
+            <td>${item.type.communityType}</td>
+        </tr>                
+    </c:forEach>
+</table>
+<jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>

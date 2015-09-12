@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee               http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <context-param>
+        <param-name>javax.servlet.jsp.jstl.fmt.localizationContext</param-name>
+        <param-value>com.prouders.controller.manager.messages</param-value>
+    </context-param>
+    <filter>
+        <filter-name>UTFFilter</filter-name>
+        <filter-class>com.prouders.controller.filters.UTFFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>UTFFilter</filter-name>
+        <url-pattern>/FrontController</url-pattern>
+    </filter-mapping>
+    <servlet>
+        <servlet-name>FrontController</servlet-name>
+        <servlet-class>com.prouders.controller.servlet.FrontController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FrontController</servlet-name>
+        <url-pattern>/FrontController</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <resource-ref>
+        <description>JDBC Connection Pool</description>
+        <res-ref-name>jdbc/prouders</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
+    <welcome-file-list>
+        <welcome-file>index.jspx</welcome-file>
+    </welcome-file-list>
+</web-app>

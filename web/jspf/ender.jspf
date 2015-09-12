@@ -1,0 +1,10 @@
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>
+<div ID="ccopyright">
+                &#0169 
+                <fmt:message key="TEXT_COPYRIGHT"/>
+                <A HREF="mailto:alex_wonder@ukr.net">
+                <fmt:message key="TEXT_AUTHOR"/></A> 2015.                 
+        </div>
+ </body>
+</html>

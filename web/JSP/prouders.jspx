@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+    Document   : prouders
+    Created on : 21.05.2015
+    Author     : Aleksandr Chudov
+-->
+<jsp:root version="2.0" 
+          xmlns:jsp="http://java.sun.com/JSP/Page" 
+          xmlns:pt="urn:jsptld:/WEB-INF/tlds/TopTag.tld"
+          xmlns:c="http://java.sun.com/jsp/jstl/core"
+          xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+<jsp:directive.page contentType="text/html" pageEncoding="UTF-8"/>
+<jsp:directive.include file="/jspf/header.jspf"/>
+<!--<fmt:setLocale scope="session" value="${(empty language)? en_GB : language}"/>
+<fmt:setBundle basename="com.prouders.controller.manager.messages"/>-->
+
+    <div ID="cmain">
+            <h3><fmt:message key="TEXT_PROUDERS"/>:</h3>
+            <table cellspacing="20" cellpadding="0">
+                <tr>
+                    <td><h4><fmt:message key="TEXT_PROUDER"/></h4></td>
+                    <td><h4><fmt:message key="TEXT_COUNTRY"/></h4></td>
+                    <td><h4><fmt:message key="TEXT_STATUS"/></h4></td>
+                    <td><h4><fmt:message key="TEXT_TYPE"/></h4></td>
+                </tr>            
+                <c:forEach var="item" items="${prouderList}" >
+                    <tr>
+                        <td>
+                        <form name="ProudersForm" method="POST" action="FrontController">
+                            <input type="hidden" name="command" value ="prouder"/>
+                            <input type="hidden" name="proudername" 
+                                   value ="${item.name}"/>
+                            <input type="hidden" name="prouderID" 
+                                   value ="${item.ID}"/>                            
+                            <button type="submit">${item.name}</button>
+                        </form>                        
+                        </td>
+                        <td>${item.country.countryName}</td>
+                        <td>${item.status}</td>
+                        <td>${item.type.userType}</td>
+                    </tr>                
+                </c:forEach>
+            </table>
+    </div>
+    <jsp:directive.include file="/jspf/ender.jspf"/>
+</jsp:root>
